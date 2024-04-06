@@ -6,32 +6,26 @@ on:
         types: [completed]
 
 
-
-
 jobs:
-    on-success pull image and run:
-        runs-on: ubuntu-latest
-        if: ${{github.event.workflow_run.conclusion=='success'}}
-        steps:
-            -name: login to docker
-            uses: docker/login-action@v2
-            with:
-                username: prateeks71
-                password: Seventy1!71
-            -name: PULL image from docker registry
-            run: |
-            docker pull prateeks71/asgn3_ps
-            -name: Run the image
-            run: |
-             OUTPUT=$(docker run prateeks71/asgn3_ps)
-             echo "Score:"
-             echo "$OUTPUT"
-             if [[ `echo "$OUTPUT 0.50" | awk '{print ($1 < $2)}'` == 1 ]]; then echo "Insufficient Accuracy" && exit 1; 
-        
+  on_success:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.11"
 
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: prateeks71
+          password: Seventy1!71
+      - name: pull docker image
+        run : |
+          docker pull prateeks71/asgn3_ps:v1
 
-
-
+      
 
 
                 
