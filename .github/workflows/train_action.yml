@@ -1,0 +1,29 @@
+name: Train
+
+on :
+  pull_request:
+    branches: [ "main" ]
+    paths-ignore:
+      - 'data/**'
+      - 'requirements.txt'
+      - 'README.md'
+
+permissions:
+  contents: read
+
+jobs:
+  docker_build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.11"
+      - name: Build Docker image
+        run : docker build . -t asgn3_ps:v1
+      - name: push docker image
+        run : |
+          docker tag asgn3_ps:v1 prateeks71/asgn3_ps:v1
+          docker push prateeks71/asgn3_ps:v1
+       
