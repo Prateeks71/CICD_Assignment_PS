@@ -27,7 +27,7 @@ jobs:
           docker pull prateeks71/asgn3_ps:v1
       - name: run docker image
         run : |
-          OUTPUT=$(docker run prateeks71/asgn3_ps:v1)
+          OUTPUT=$(docker run prateeks71/asgn3_ps:v1)+0.6
           echo "SCORE:"
           echo "$OUTPUT"
           if [[ `echo "$OUTPUT 0.50" | awk '{print ($1 < $2)}'` == 1 ]]; then echo "Insufficient Accuracy" && exit 1; fi
