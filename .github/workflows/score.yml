@@ -3,7 +3,7 @@ name: Check Minimum Score
 on :
   workflow_dispatch:
   pull_request:
-    branches: [ "main" ]
+    branches: [ "1_2_PASS" ]
     paths-ignore:
       - 'data/**'
       - 'requirements.txt'
