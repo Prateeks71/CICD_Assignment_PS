@@ -2,6 +2,7 @@ name: Test
 
 on:
     workflow_run:
+        branches: [ "1_2_PASS" ]
         workflows: [TRAIN]
         types: [completed]
 
