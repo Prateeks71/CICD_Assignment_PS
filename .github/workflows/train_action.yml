@@ -16,22 +16,24 @@ jobs:
         with:
           python-version: "3.11"
       - name: Build Docker image
+        id: step1
         run : docker build . -t asgn3_ps:v1
         continue-on-error: true
 
       - name: Login to Docker Hub
+        id: step2
         uses: docker/login-action@v2
         with:
           username: prateek71
           password: Seventy1!71
         continue-on-error: true
       - name: push docker image
+        id: step3
         run : |
           docker tag asgn3_ps:v1 prateeks71/asgn3_ps:v1
           docker push prateeks71/asgn3_ps:v1
-        continue-on-error: true
-  
+        continue-on-error: true  
       - name: Handle Docker Push Failure
-        if: ${{ failure() }}
+        if: ${{steps.step1.outcome!='success' || steps.step2.outcome!='success' || steps.step3.outcome!='success'}}
         run: echo "Docker push failed" && exit 1; fi
        
