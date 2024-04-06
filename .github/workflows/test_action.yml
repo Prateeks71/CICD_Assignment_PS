@@ -9,7 +9,7 @@ on:
 jobs:
   on_success:
     runs-on: ubuntu-latest
-    if: ${{github.event.workflow_run.conclusion=='failure'}}
+    if: ${{github.event.workflow_run.conclusion=='success'}}
     steps:
       - uses: actions/checkout@v3
       - name: Setup Python 3.11
@@ -30,7 +30,8 @@ jobs:
           OUTPUT=$(docker run prateeks71/asgn3_ps:v1)
           echo "SCORE:"
           echo "$OUTPUT"
-          if [[`echo "$OUTPUT 0.50" | awk '{print($1 < $2)}'`==1]]; then echo "LESS ACCURACY" && exit 1;
+          if [$OUTPUT -lt 0.5];then
+          echo "LESS ACCURACY" && exit 1;
           fi
       - name: Install pytest and run
         run : |
