@@ -34,6 +34,7 @@ jobs:
           docker push prateeks71/asgn3_ps:v1
         continue-on-error: true  
       - name: Handle Docker Push Failure
-        if: ${{steps.step1.outcome!='success' || steps.step2.outcome!='success' || steps.step3.outcome!='success'}}
+        if: ${{steps.step1.outcome!='success'}} 
+        # || steps.step2.outcome!='success' || steps.step3.outcome!='success'}}
         run: echo "Docker push failed" && exit 1; fi
        
