@@ -7,8 +7,9 @@ on:
 
 
 jobs:
-  on_success:
+  TRAIN_on_success:
     runs-on: ubuntu-latest
+    if: ${{github.event.workflow_run.conclusion=='success'}}
     steps:
       - uses: actions/checkout@v3
       - name: Setup Python 3.11
@@ -24,6 +25,9 @@ jobs:
       - name: pull docker image
         run : |
           docker pull prateeks71/asgn3_ps:v1
+      - name: pull docker image
+        run : |
+          docker run prateeks71/asgn3_ps:v1
 
       
 
