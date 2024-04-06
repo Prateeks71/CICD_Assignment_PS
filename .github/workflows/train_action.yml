@@ -2,6 +2,12 @@ name: Train
 
 on :
   workflow_dispatch:
+  pull_request:
+    branches: [ "1_2_MAIN" ]
+    paths-ignore:
+      - 'data/**'
+      - 'requirements.txt'
+      - 'README.md'
 
 permissions:
   contents: read
