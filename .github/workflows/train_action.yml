@@ -1,7 +1,7 @@
 name: Train
 
 on :
-#  workflow_dispatch:
+  workflow_dispatch:
   pull_request:
     branches: [ "1_2_FAIL" ]
     paths-ignore:
